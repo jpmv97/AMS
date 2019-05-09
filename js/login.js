@@ -1,5 +1,6 @@
 $(document).ready(function(){
 $("#sistema").on('click', '#login' ,function(event){
+
 		event.preventDefault();
 		var usr = $("#usuario").val();
 		var psw = $("#contra").val();
@@ -7,10 +8,10 @@ $("#sistema").on('click', '#login' ,function(event){
 		$.post("http://localhost/login.php",{usuario: usr , contra: psw}, function (data){
 			var resultado = data;
 			
-			if(resultado > 0){
-				window.location.href = "main.html";
+			if(resultado == "admin"){
+				window.location.href = "admin1.html";
 			}else{
-				alert("usuario o contrasena incorrectos");
+				window.location.href = "Visualizargraf.html";
 			}
 		});	
 	});

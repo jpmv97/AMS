@@ -10,7 +10,7 @@ if ($mysqli->connect_errno) {
 }
 
 if(isset($usuario, $contra)){
-	$sql = "SELECT idUsuario from usuario where usuario = '$usuario' AND contra = '$contra'";
+	$sql = "SELECT IDUsuario from usuario where nombreUsuario = '$usuario'";
 	if(!$result = $mysqli->query($sql)){
       die($mysqli->error);
     }else{
@@ -18,13 +18,21 @@ if(isset($usuario, $contra)){
 			while($row = $result->fetch_assoc()){
 		    	$datos = $row['idUsuario'];
 			}
-			$result->free();	
+			$result->free();
+			$sql = "SELECT IDUsuario from UsuarioContraseña where IDUSUARIO = '$datos' and Contraseña = '$contra'"
+			if(!$result = $mysqli->query($sql)){
+		      die($mysqli->error);
+		    }else{
+		      	if(!$result->num_rows==0){
+					while($row = $result->fetch_assoc()){
+				    	$datos = $row['idUsuario'];
+					}
+				}
+			}
 		}else{
 			$datos = 0;
 		}
 	}
-
 	echo $datos;
 }
-
 ?>
